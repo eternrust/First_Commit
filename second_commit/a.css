@@ -1,0 +1,18 @@
+#co{
+    color :yellowgreen;
+}
+body{
+    background-image:url("./space.jpeg");
+    background-size: cover;
+}
+div > span{
+    color:red;
+}
+div{
+    width: 100px;
+    height: 100px;
+    background-color: black;
+}
+.div:hover{
+    background-color:red;
+}
