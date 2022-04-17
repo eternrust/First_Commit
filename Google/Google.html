@@ -8,9 +8,9 @@
     <title>Google</title>
 </head>
 <body>
-    <div id="up">
+    <div class="up">
         <div id="up_laft">
-            <a style="margin-right:4px"class="link" href="https://about.google/?fg=1&utm_source=google-KR&utm_medium=referral&utm_campaign=hp-header">
+            <a style="margin-right:15px"class="link" href="https://about.google/?fg=1&utm_source=google-KR&utm_medium=referral&utm_campaign=hp-header">
                 <span>Google 정보</span>
             </a>
             <a class="link" href="https://store.google.com/KR?utm_source=hp_header&utm_medium=google_ooo&utm_campaign=GS100042&hl=ko-KR">
@@ -24,15 +24,52 @@
             <a id="image" class="link" href="https://www.google.co.kr/imghp?hl=ko&ogbl">
                 <span>이미지</span>
             </a>
-            <img id="app" src="./Google App.png">
+            <a id="app" href="https://www.google.co.kr/intl/ko/about/products">
+                <img src="./Google App.png" width="19px" height="19px">
+            </a>
             <button id="login" type="button" onclick="location.href='https://accounts.google.com/ServiceLogin?hl=ko&passive=true&continue=https://www.google.co.kr/&ec=GAZAmgQ';">
                 로그인
             </button>
         </div>
     </div>
-    <img id="logo" src="./Google.png"/>
+    <div id="logo">
+        <img src="./Google.png"/>
+    </div>
     <div>
         <input id="search" type="search">
+    </div>
+    <div id="center">
+        <button id="Google_search" type="button" onclick="location.href='';">
+            Google 검색
+        </button>
+        <button id="Lucky" type="button" onclick="location.href='https://www.google.com/doodles';">
+            I'm Felling Lucky
+        </button>
+    </div>
+    <div class="down">
+        <span id="korea">대한민국</span><br>
+        <div id="down_down">
+            <div id="down_left">
+                <a class="link" href="https://www.google.co.kr/intl/ko_kr/ads/?subid=ww-ww-et-g-awa-a-g_hpafoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpafooter&fg=1">
+                    <span>광고</span>
+                </a>
+                <a class="link" href="https://www.google.co.kr/services/?subid=ww-ww-et-g-awa-a-g_hpbfoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpbfooter&fg=1">
+                    <span>비즈니스</span>
+                </a>
+                <a class="link" href="https://google.com/search/howsearchworks/?fg=1">
+                    <span>검색의 원리</span>
+                </a>
+            </div>
+            <div id="down_right">
+                <a class="link" href="https://policies.google.com/privacy?hl=ko&fg=1">
+                    <span>개인정보처리방침</span>
+                </a>
+                <a class="link" href="https://policies.google.com/terms?hl=ko&fg=1">
+                    <span>약관</span>
+                </a>
+                <span id="setting">설정</span>
+            </div>
+        </div>
     </div>
 </body>
 </html>
