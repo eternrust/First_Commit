@@ -1,3 +1,9 @@
+a{
+    cursor: pointer;
+}
+button{
+    cursor: pointer;
+}
 .up a{
     color : black;
     text-decoration-line: none;
@@ -56,6 +62,7 @@
     border:0;
     outline:0;
     border-radius: 5px 5px;
+    cursor: pointer;
 }
 #login:hover{
     background-color:rgb(66, 134, 244);
@@ -64,7 +71,7 @@
 #logo{
     display: flex;
     margin:auto;
-    margin-top: 11%;
+    margin-top: 5.5%;
     align-items: flex-end;
     justify-content: center;
 }
@@ -103,6 +110,9 @@
     margin-left: 15px;
     margin-right: 5px;
     justify-content: flex-end;
+    border: 0;
+    outline: 0;
+    background-color: #ffffff;
 }
 #mic{
     display: flex;
