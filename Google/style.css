@@ -78,6 +78,7 @@ button{
 
 #search{
     display: flex;
+    max-width: 95%;
     width:580px;
     height: 43px;
     border-radius: 30px 30px;
