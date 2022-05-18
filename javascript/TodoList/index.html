@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./app.js" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>TodoList</h1>
+    </header>
+    <div id="main">
+        <div id="Add">
+            <img src="./img/Check.png" alt="check" width="25px">
+            <input id="txt" type="text" onkeypress="NewValue(event)" placeholder="해야할 일을 입력해주세요.">
+        </div>
+        <div id="List">
+            <div class="work">
+                <div class="check" class="checked"></div>
+                <div class="todo">하이</div>
+                <button class="X">X</button>
+            </div>
+        </div>
+        <div id="Del">
+            <span>0 Items left</span>
+            <div id="Del_button">
+                <input type="button" id="All" value="All">
+                <input type="button" id="Active" value="Active">
+                <input type="button" id="Completed" value="Completed">
+            </div>
+            <input type="button" id="Clear" value="Clear Completed">
+        </div>
+    </div>
+</body>
+</html>
