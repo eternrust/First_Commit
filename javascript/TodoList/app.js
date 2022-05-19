@@ -2,7 +2,6 @@ let todolist = [];
 let cnt = 0
 let id = 0;
 const List = document.getElementById('List');
-const Checking = document.querySelectorAll('.check');
 
 function NewValue(e){
     let text = document.getElementById('txt').value;
@@ -21,7 +20,6 @@ const getAllTodos = () => {
 
 const AddTodos = (text) => {
     const cnt = id++;
-    const list = getAllTodos().concat({id:cnt, completed:false, content: text});
     const newTodos = [...getAllTodos(),{id:cnt, completed:false, content: text}];
     setTodos(newTodos);
     update();
@@ -37,6 +35,7 @@ const update = () => {
         
         const todoCheck = document.createElement('div');
         todoCheck.classList.add('check');
+        todoCheck.addEventListener('click', () => Checking(todos.id));
 
         const todoText = document.createElement('div');
         todoText.classList.add('todo');
@@ -58,13 +57,12 @@ const update = () => {
         List.appendChild(todoDiv);
     })
 }
-
-Checking.forEach((target) => target.addEventListener("click", function() {
-    if(this.classList.contains('checked')){
-        this.classList.remote('checked');
-        this.innerText='';
+const checking = (Id) => {
+    const todo = todolist.find(callback[id=Id]);
+    if(todo.completed){
+        todo.completed = false;
     } else {
-        this.classList.add('checked');
-        this.innerText='✔';
+        todo.completed = true;
     }
-}))
+    update();
+}
