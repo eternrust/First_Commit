@@ -15,6 +15,11 @@ header {
     color: lightsalmon;
 }
 
+#V {
+    margin-left: 15px;
+    font-size: 25px;
+}
+
 #main {
     width: 500px;
     display: flex;
@@ -52,7 +57,7 @@ header {
     background-color: transparent;
 }
 
-#Del{
+.Del{
     display: flex;
     width: 500px;
     height: 50px;
@@ -63,7 +68,7 @@ header {
     background-color: transparent;
 }
 
-#Del div {
+.Del div {
     width: 200px;
     display: flex;
     justify-content: space-around;
@@ -140,15 +145,19 @@ header {
     cursor: pointer;
 }
 
-.work .checked .check{
+.work.checked .check{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 2px solid darkgray;
     color:green;
+    font-size: 20px;
 }
 
-.work .checked .todo{
+.work.checked .todo{
     font-style: italic;
     text-decoration: line-through;
-    color:lightgray;
+    color:darkgray;
 }
 
 .X{
@@ -164,4 +173,16 @@ header {
     outline: 0;
     justify-content: flex-end;
     cursor: pointer;
+}
+
+.edit{
+    display: flex;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 500px;
+    height: 60px;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
 }
