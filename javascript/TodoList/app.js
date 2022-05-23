@@ -2,17 +2,42 @@ let todolist = [];
 let id = 0;
 const List = document.getElementById('List');
 const TodoDel = document.querySelector('.Del');
-const todoInput = document.querySelector('.input');
-function NewValue(e){
-    let text = document.getElementById('txt').value;
-    if(e.keyCode == 13){
-        if(text){
-        AddTodos(text);
-        document.getElementById('txt').value='';
-        } else {
-            alert('값을 입력해주세요!');
+
+const init = () => {
+    const text = document.querySelector('#txt');
+    const AllCheck = document.querySelector('#V');
+    const checkclass = AllCheck.className; 
+    text.addEventListener('keypress',(e) => {
+        if(e.key === 'Enter'){
+            AddTodos(text.value);
+            text.value = '';
         }
-    }
+    })
+    AllCheck.addEventListener('click', () => completedCheck());
+}
+
+const iscompleteAll = () => {
+    const todo = getAllTodos().length;
+    const check = completedtrue.length;
+    if(todo==check) return true;
+    else return false; 
+}
+
+const completedtrue = () => {
+    return getAllTodos().filter(todo => todo.completed===true);
+}
+
+const completedfalse = () => {
+    return getAllTodos().filter(todo => todo.completed===false);
+}
+
+
+
+const completedCheck = () => {
+    if(getAllTodos().length==0) return;
+
+    if(iscompleteAll()) alert('good');
+    
 }
 
 const setTodos = (newTodos) => {
@@ -49,15 +74,41 @@ const resetText = (e, todoId) => {
     inputElem.value = inputText;
     inputElem.classList.add('edit');
 
+    inputElem.addEventListener('keypress',(e) => {
+        if(e.key === 'Enter'){
+            setText(e.target.value,todoId);
+            document.body.removeEventListener('click',clickbody);
+        }
+    })
+    const clickbody = (e) => {
+        if(e.target !== inputElem){
+            todoItemElem.removeChild(inputElem);
+            document.body.removeEventListener('click',clickbody);
+        }
+    }
+
+    document.body.addEventListener('click',clickbody);
     todoItemElem.appendChild(inputElem);
+}
+
+const setText = (value,todoId) => {
+    const todo = getAllTodos().map(todo => todo.id === todoId ? {...todo,content: value} : todo);
+    setTodos(todo);
+    update();
 }
 
 const update = () => {
     List.innerHTML = null;
-    const todospan = TodoDel.querySelector('span');
-    const todolength = getAllTodos().filter(todo => todo.completed == false).length;
-    todospan.innerHTML = todolength + ' Items left';
     const allTodos=getAllTodos();
+    const todospan = TodoDel.querySelector('span');
+    const todolength = allTodos.filter(todo => todo.completed == false).length;
+    todospan.innerHTML = todolength + ' Items left';
+    const AllCheck = document.querySelector('#V');
+    if(todolength==0){
+        AllCheck.classList.add('Checked');
+    } else {
+        AllCheck.classList.remove('Checked');
+    }
     allTodos.forEach(todos => {
         const todoDiv = document.createElement('div');
         todoDiv.classList.add('work');
@@ -102,3 +153,5 @@ TodoDel.addEventListener('click',(e) => {
     }
     update();
 })
+
+init()

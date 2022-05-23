@@ -19,6 +19,9 @@ header {
     margin-left: 15px;
     font-size: 25px;
 }
+.Checked{
+    color:green;
+}
 
 #main {
     width: 500px;
@@ -178,11 +181,12 @@ header {
 .edit{
     display: flex;
     position: absolute;
-    left: 0;
-    top: 0;
     width: 500px;
-    height: 60px;
+    height: 40px;
     margin: auto;
     justify-content: center;
     align-items: center;
+    background-color: white;
+    border: 2px solid gray;
+    outline:0;
 }
