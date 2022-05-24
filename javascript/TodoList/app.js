@@ -1,157 +1,189 @@
-let todolist = [];
+let List = [];
 let id = 0;
-const List = document.getElementById('List');
-const TodoDel = document.querySelector('.Del');
+let completeAll = false;
+const todoItemElem = document.querySelector('#List');
+const check = document.querySelector('#V');
+const under = document.querySelector('.Del');
+const underbutton = document.querySelectorAll('#Del_button input');
 
-const init = () => {
-    const text = document.querySelector('#txt');
-    const AllCheck = document.querySelector('#V');
-    const checkclass = AllCheck.className; 
-    text.addEventListener('keypress',(e) => {
-        if(e.key === 'Enter'){
-            AddTodos(text.value);
-            text.value = '';
-        }
-    })
-    AllCheck.addEventListener('click', () => completedCheck());
-}
-
-const iscompleteAll = () => {
-    const todo = getAllTodos().length;
-    const check = completedtrue.length;
-    if(todo==check) return true;
-    else return false; 
-}
-
-const completedtrue = () => {
-    return getAllTodos().filter(todo => todo.completed===true);
-}
-
-const completedfalse = () => {
-    return getAllTodos().filter(todo => todo.completed===false);
-}
-
-
-
-const completedCheck = () => {
-    if(getAllTodos().length==0) return;
-
-    if(iscompleteAll()) alert('good');
-    
-}
-
-const setTodos = (newTodos) => {
-    todolist = newTodos;
-}
-const getAllTodos = () => {
-    return todolist;
-}
-
-const AddTodos = (text) => {
+const AddValue = (text) => {
     const cnt = id++;
-    const newTodos = [...getAllTodos(),{id:cnt, completed:false, content: text}];
-    setTodos(newTodos);
-    update();
+    const todos = [...getAllTodos(),{id:cnt,completed:false,content:text}]
+    setAllTodos(todos);
+    Update();
 }
 
-const Checking = (todoId) => {
-    const todo = getAllTodos().map(todo => todo.id === todoId ? {...todo, completed:!todo.completed} : todo);
-    setTodos(todo);
-    update();
+const setAllTodos = (todos) => {
+    List = todos;
 }
 
-const Delete = (todoId) => {
-    const todo = getAllTodos().filter(todo => todo.id !== todoId);
-    setTodos(todo);
-    update();
+const getAllTodos = () => {
+    return List;
+}
+
+const todoCheck = (todoId) => {
+    const todos = getAllTodos().map(todo => todo.id===todoId?{...todo, completed:!todo.completed}:todo);
+    setAllTodos(todos);
+    Update();
+    Itemleft();
+}
+
+const todoDel = (todoId) => {
+    const todos = getAllTodos().filter(todo => todo.id!==todoId);
+    setAllTodos(todos);
+    Update();
+    Itemleft();
+}
+
+const resetElem = (text, todoId) => {
+    const todos = getAllTodos().map(todo => todo.id===todoId?{...todo, content:text}:todo);
+    setAllTodos(todos);
+    Update();
 }
 
 const resetText = (e, todoId) => {
     const todoElem = e.target;
-    const inputText = e.target.innerText;
     const todoItemElem = todoElem.parentNode;
+    const todoText = todoElem.innerText;
     const inputElem = document.createElement('input');
-    inputElem.value = inputText;
     inputElem.classList.add('edit');
-
+    inputElem.value = todoText;
+    
     inputElem.addEventListener('keypress',(e) => {
-        if(e.key === 'Enter'){
-            setText(e.target.value,todoId);
-            document.body.removeEventListener('click',clickbody);
+        if(e.key==='Enter'){
+            resetElem(inputElem.value, todoId);
+            document.body.removeEventListener('click',bodyclick);
         }
     })
-    const clickbody = (e) => {
-        if(e.target !== inputElem){
+
+    const bodyclick = (e) => {
+        if(e.target!== inputElem){
             todoItemElem.removeChild(inputElem);
-            document.body.removeEventListener('click',clickbody);
+            document.body.removeEventListener('click',bodyclick);
         }
     }
-
-    document.body.addEventListener('click',clickbody);
+    document.body.addEventListener('click',bodyclick);
     todoItemElem.appendChild(inputElem);
 }
 
-const setText = (value,todoId) => {
-    const todo = getAllTodos().map(todo => todo.id === todoId ? {...todo,content: value} : todo);
-    setTodos(todo);
-    update();
+const iscompleteAll = () => {
+    if(getAllTodos().length==0) return;
+
+    if(completeAll) incompleted();
+    else completed();
+
+    Update();
+    Itemleft();
 }
 
-const update = () => {
-    List.innerHTML = null;
-    const allTodos=getAllTodos();
-    const todospan = TodoDel.querySelector('span');
-    const todolength = allTodos.filter(todo => todo.completed == false).length;
-    todospan.innerHTML = todolength + ' Items left';
-    const AllCheck = document.querySelector('#V');
-    if(todolength==0){
-        AllCheck.classList.add('Checked');
+const completedTrue = () => {
+    return getAllTodos().filter(todo => todo.completed===true);
+}
+
+const completedFalse = () => {
+    return getAllTodos().filter(todo => todo.completed===false);
+}
+
+const incompleted = () => {
+    check.classList.add('Checked');
+    const todos = getAllTodos().map(todo => ({...todo, completed:false}));
+    setAllTodos(todos);
+}
+
+const completed = () => {
+    check.classList.remove('Checked');
+    const todos = getAllTodos().map(todo => ({...todo, completed:true}));
+    setAllTodos(todos);
+}
+
+const Itemleft = () => {
+    const clear = completedFalse();
+    const span = document.querySelector('.Del span');
+    span.innerHTML = `${clear.length} Items left`;
+    if(!clear.length && getAllTodos().length){
+        check.classList.add('Checked');
+        completeAll = true;
     } else {
-        AllCheck.classList.remove('Checked');
+        check.classList.remove('Checked');
+        completeAll = false;
     }
-    allTodos.forEach(todos => {
-        const todoDiv = document.createElement('div');
-        todoDiv.classList.add('work');
-        todoDiv.setAttribute("data-id",todos.id);
-        
-        const todoCheck = document.createElement('div');
-        todoCheck.classList.add('check');
-        todoCheck.addEventListener('click', () => Checking(todos.id));
+}
 
-        const todoText = document.createElement('div');
-        todoText.classList.add('todo');
-        todoText.innerHTML=todos.content;
-        todoText.addEventListener('dblclick', (event) => resetText(event, todos.id));
+const underclick = (e) => {
+    switch(e.target.id){
+        case 'All':
+        case 'Active':
+        case 'Completed':
+            under.setAttribute('data-id', e.target.id); 
+            underbutton.forEach(button => button.id===e.target.id?
+                button.style.outline = '3px solid orange':
+                button.style.outline = '1px solid gray')
+            break;
+        case 'Clear':  clearDel(); break;
+    }
+    Update();
+    Itemleft();
+}
 
-        const todoDel = document.createElement('button');
-        todoDel.classList.add('X');
-        todoDel.innerHTML = 'X';
-        todoDel.addEventListener('click', () => Delete(todos.id));
+const clearDel = () => {
+    const todos = completedFalse();
+    setAllTodos(todos);
+}
+const getList = () => {
+    switch(under.dataset.id){
+        case 'Active': return completedFalse();
+        case 'Completed': return completedTrue();
+        default: return getAllTodos();
+    }
+}
 
-        if(todos.completed){
-            todoDiv.classList.add('checked');
-            todoCheck.innerText = '✔';
+const Update = () => {
+    todoItemElem.innerHTML = null;
+    const todos = getList();
+    todos.map(todo => {
+        const todoElem = document.createElement('div');
+        todoElem.classList.add('work');
+        todoElem.setAttribute('data-id', todo.id);
+
+        const checkElem = document.createElement('div');
+        checkElem.classList.add('check');
+        if(todo.completed){
+            todoElem.classList.add('checked');
+            checkElem.innerText = '✔';
         }
+        checkElem.addEventListener('click',() => todoCheck(todo.id));
 
-        todoDiv.appendChild(todoCheck);
-        todoDiv.appendChild(todoText);
-        todoDiv.appendChild(todoDel);
-        
-        List.appendChild(todoDiv);
+        const textElem = document.createElement('div');
+        textElem.classList.add('todo');
+        textElem.innerText = todo.content;
+        textElem.addEventListener('dblclick',(event) => resetText(event, todo.id));
+
+        const DelElem = document.createElement('div');
+        DelElem.classList.add('X');
+        DelElem.innerHTML = 'X';
+        DelElem.addEventListener('click',() => todoDel(todo.id));
+
+        todoElem.appendChild(checkElem);
+        todoElem.appendChild(textElem);
+        todoElem.appendChild(DelElem);
+
+        todoItemElem.appendChild(todoElem);
     })
 }
 
-TodoDel.addEventListener('click',(e) => {
-    if(e.target.id=='All'){
-        TodoDel.setAttribute("data-id",'1');
-    } else if(e.target.id=='Active'){
-        TodoDel.setAttribute("data-id",'2');
-    } else if(e.target.id=='Completed'){
-        TodoDel.setAttribute("data-id",'3');
-    } else if(e.target.id=='Clear'){
-        todolist=[];
-    }
-    update();
-})
+const init = () => {
+    const inputElem = document.querySelector('#txt');
+    
+    inputElem.addEventListener('keypress', (e) => {
+        if(e.key === 'Enter'){
+            AddValue(inputElem.value);
+            inputElem.value = null;
+            Itemleft();
+        }
+    })
+    check.addEventListener('click',() => iscompleteAll());
+    under.addEventListener('click',(event) => underclick(event));
+    under.setAttribute('data-id', 'All');
+}
 
-init()
+init();

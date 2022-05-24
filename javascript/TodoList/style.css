@@ -77,6 +77,11 @@ header {
     justify-content: space-around;
     background-color: transparent;
 }
+
+.All #All{
+    border: 5px solid black;
+}
+
 #All{
     width: 30px;
     height: 20px;
@@ -85,9 +90,6 @@ header {
     background-color: transparent;
     outline: 1px solid gray;
     cursor: pointer;
-}
-#All:hover{
-    outline: 2px solid gray;
 }
 
 #Active{
@@ -99,9 +101,6 @@ header {
     outline: 1px solid gray;
     cursor: pointer;
 }
-#Active:hover{
-    outline: 2px solid gray;
-}
 
 #Completed{
     width: 80px;
@@ -111,9 +110,6 @@ header {
     background-color: transparent;
     outline: 1px solid gray;
     cursor: pointer;
-}
-#Completed:hover{
-    outline: 2px solid gray;
 }
 
 #Clear{
