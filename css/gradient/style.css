@@ -1,0 +1,31 @@
+body {
+    display: flex;
+}
+
+.box {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+}
+
+.gradient1 {
+    background: linear-gradient(to right, green, red);
+}
+
+.gradient2 {
+    background: radial-gradient(yellow, red);
+}
+
+.gradient3 {
+    background: repeating-linear-gradient(
+        to top right, yellow, yellow 10px,green 10px, green 20px);
+}
+
+.gradient4 {
+    background: repeating-radial-gradient(
+        yellow, yellow 10px,green 10px, green 20px);
+}
+
+.gradient5 {
+    background: conic-gradient(skyblue, yellow, skyblue);
+}

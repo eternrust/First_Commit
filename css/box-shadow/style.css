@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    width: 680px;
+    height: 200px;
+    background-color: tan;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    background-color: thistle
+}
+
+.shadow1 {
+    box-shadow: 10px 10px skyblue;
+}
+
+.shadow2 {
+    box-shadow: 10px 10px 10px skyblue;
+}
+
+.shadow3 {
+    box-shadow: 10px 10px 10px 10px skyblue;
+}
+
+.shadow4 {
+    box-shadow: 10px 10px 10px 10px skyblue inset;
+}
+
+.shadow5 {
+    box-shadow: 10px 10px 10px yellow,
+    -10px -10px 10px skyblue;
+}
