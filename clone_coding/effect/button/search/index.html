@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <link rel="stylesheet" href="app.css">
+    <meta charset="UTF-8">
+    <script src="app.js" defer></script>
+    <title>Search</title>
+</head>
+<body>
+    <div class="search_wrapper">
+        <div class="input_holder">
+            <input type="text" class="search_input" placeholder="Type to search">
+            <button class="search_icon" onclick="searchToggle(this, event);">
+                <span></span>
+            </button>
+        </div>
+        <span class="close" onclick="searchToggle(this, event);"></span>
+    </div>
+</body>
+</html>

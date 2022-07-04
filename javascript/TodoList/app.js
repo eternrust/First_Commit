@@ -67,7 +67,7 @@ const resetText = (e, todoId) => {
 }
 
 const iscompleteAll = () => {
-    if(getAllTodos().length==0) return;
+    if(getAllTodos().length===0) return;
 
     if(completeAll) incompleted();
     else completed();
