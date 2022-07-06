@@ -184,6 +184,9 @@ const init = () => {
     check.addEventListener('click',() => iscompleteAll());
     under.addEventListener('click',(event) => underclick(event));
     under.setAttribute('data-id', 'All');
+    underbutton.forEach(button => button.id===under.dataset.id?
+        button.style.outline = '3px solid orange':
+        button.style.outline = '1px solid gray')
 }
 
 init();
