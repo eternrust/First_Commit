@@ -1,0 +1,8 @@
+.bubble {
+    position: fixed;
+    background: rgba(157, 172, 241, 0.2);
+    border-radius: 1em;
+    box-shadow: 0 0 5px #5e41ab;
+    transform: translate(-50%, -50%);
+    transition: all 0.1s ease-in-out;
+}
