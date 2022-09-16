@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>music_radio</title>
+</head>
+<body>
+    <input type="file" id="fileUpload" accept='audio/*' />
+    <audio autoplay loop controls id="myAudio">
+        <source src="sound.mp3" type="audio/mpeg">
+        <source src="sound.ogg" type="audio/ogg">
+        오디오가 지원되지 않는 브라우저입니다.
+    </audio>
+    <script src="./app.js"></script>
+</body>
+</html>
