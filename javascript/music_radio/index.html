@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>music_radio</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <input type="file" id="fileUpload" accept='audio/*' />
@@ -13,6 +14,12 @@
         <source src="sound.ogg" type="audio/ogg">
         오디오가 지원되지 않는 브라우저입니다.
     </audio>
+    <div id="Audio_box">
+        <div id="Audio_pause"></div>
+        <span id="Audio_time"></span>
+        <div id="Audio_bar"></div>
+        <div id="Audio_sound"></div>
+    </div>
     <script src="./app.js"></script>
 </body>
 </html>
