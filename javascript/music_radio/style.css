@@ -1,5 +1,5 @@
 #Audio_box {
-    width: 300px;
+    width: 400px;
     height: 50px;
     background-color: #eee;
     border: 1px solid #ddd;
@@ -11,4 +11,22 @@
 
 #Audio_pause {
     cursor: pointer;
+}
+
+#Audio_bar {
+    width: 200px;
+    height: 30px;
+    background-color: #ddd;
+    border: 2px soild #ccc;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+}
+
+#Audio_bar_button {
+    width: 25px;
+    height: 25px;
+    background-color: #888;
+    border: none;
+    border-radius: 20px;
 }

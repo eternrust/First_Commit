@@ -8,16 +8,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!--음악 파일 불러오기-->
     <input type="file" id="fileUpload" accept='audio/*' />
+    
+    <!--사운드 바를 구현하기 위한 참고-->
     <audio autoplay loop controls id="myAudio">
         <source src="sound.mp3" type="audio/mpeg">
         <source src="sound.ogg" type="audio/ogg">
         오디오가 지원되지 않는 브라우저입니다.
     </audio>
+
+    <!--사운드 바 컨트롤러 구현하는 html-->
     <div id="Audio_box">
         <div id="Audio_pause"></div>
         <span id="Audio_time"></span>
-        <div id="Audio_bar"></div>
+        <div id="Audio_bar">
+            <div id="Audio_bar_button"></div>
+        </div>
         <div id="Audio_sound"></div>
     </div>
     <script src="./app.js"></script>
