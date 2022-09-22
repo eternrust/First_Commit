@@ -2,6 +2,7 @@ const fileInput = document.getElementById("fileUpload");
 // const audio = document.getElementById("myAudio");
 const pause_btn = document.getElementById("Audio_pause");
 const time_text = document.getElementById("Audio_time");
+const audio_bar = document.getElementById("Audio_bar");
 const bar_btn = document.getElementById("Audio_bar_button");
 
 // 음악을 멈추지 않았다 == false │ 음악이 멈췄다 == true
@@ -53,16 +54,34 @@ const Audio_start = () => {
 
   const Time_view = setInterval(() => {
     let f_minute = Math.floor(MyAudio.currentTime/60);
-  let f_second = Math.floor(MyAudio.currentTime%60);
-  if(f_second < 10) {
-    f_second = `0${f_second}`;
-  }
+    let f_second = Math.floor(MyAudio.currentTime%60);
+    if(f_second < 10) {
+      f_second = `0${f_second}`;
+    }
+    // 오류!
+    bar_set();
 
-  time_text.innerText = `${f_minute} : ${f_second} / ${b_minute} : ${b_second}`;
-  if(pause) {
-    clearInterval(Time_view);
-  }
+    time_text.innerText = `${f_minute} : ${f_second} / ${b_minute} : ${b_second}`;
+    if(pause) {
+      clearInterval(Time_view);
+    }
   },1000)
+}
+
+// 절대 좌표 구하는 함수(왼쪽)
+const getAbsoluteLeft = (element) => {
+  return window.pageXOffset + element.getBoundingClientRect().left;
+}
+
+// 음악 재생 위치 결정하기(미완성)
+const bar_set = () => {
+  const parentAbsoluteLeft = getAbsoluteLeft(audio_bar); 
+  const AbsoluteLeft = getAbsoluteLeft(bar_btn);
+  // bar_btn의 현재 상대 좌표
+  const relativeLeft =  AbsoluteLeft - parentAbsoluteLeft;
+  const percentTime =  MyAudio.currentTime / MyAudio.duration * 100;
+  const elementPercent = relativeLeft / 175 * 100;
+  bar_btn.style.marginLeft = Math.floor(percentTime / 100 * 175);
 }
 
 // 초기 기본 시작(정지) 버튼 설정
