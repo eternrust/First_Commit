@@ -17,9 +17,8 @@ let clicked = false;
 // 마우스를 움직이는 중인가?
 let moving = false;
 
-// bar_btn를 클릭했을 때 X좌표
-let bar_btn_x = null;
-
+// 마우스 이동을 시작했는가? (Drog&Drop)
+let isDragging = false;
 
 // 음악 파일 불러오기
 const handleFiles = (e) => {
@@ -33,6 +32,7 @@ const handleFiles = (e) => {
     MyAudio.src = fileReader.result;
     MyAudio.addEventListener('loadedmetadata', () => Audio_start());
     bar_btn.style.backgroundColor = '#222';
+    bar_btn.style.display = 'block';
   };
 };
 
@@ -105,7 +105,13 @@ const bar_set = () => {
 
 // audio_bar 클릭 위치를 재생 위치로 변환
 const bar_click = (e) => {
-  const parentAbsoluteLeft = getAbsoluteLeft(audio_bar);
+  if(isDragging && !pause) {
+    if (MyAudio.src !== undefined) {
+      MyAudio.pause();
+    }
+    pause_btn.innerText = "▶︎";
+    pause = true;
+  }
   let x = e.clientX;
   // bar_btn의 현재 상대 좌표
   const relativeLeft = x - parentAbsoluteLeft;
@@ -115,14 +121,6 @@ const bar_click = (e) => {
   bar_set();
 }
 
-// bar_btn의 Drog&Drop(미완)
-const drog_drop = (e) => {
-  let x = e.clientX;
-  let relativeLeft;
-
-  MyAudio.currentTime = (relativeLeft - 12.5) / 175 * MyAudio.duration
-}
-
 // 초기 기본 시작(정지) 버튼 설정
 pause_btn.innerText = "▶︎";
 pause_btn.addEventListener("click", () => pause_click());
@@ -130,12 +128,15 @@ pause_btn.addEventListener("click", () => pause_click());
 // 초기 기본 초 설정
 time_text.innerText = '0 : 00 / 0 : 00';
 
+// audio_bar의 절대위치
+const parentAbsoluteLeft = getAbsoluteLeft(audio_bar);
+
 // audio_bar를 클릭했을 때
 audio_bar.addEventListener("click", (event) => { clicked = true; moving = false; bar_click(event); });
 // bar_btn 드래그 앤 드롭
-bar_btn.addEventListener('mousedown', () =>   bar_btn_x = e.clientX);
-// audio_bar.addEventListener('mousemove', (event) => { moving = true; bar_click(event); });
-// audio_bar.addEventListener('mouseup', () => { clicked = false; moving = false;);
+bar_btn.addEventListener('mousedown', () =>   {isDragging = true;});
+document.addEventListener('mousemove', (event) => { if(isDragging) {bar_click(event);} });
+document.addEventListener('mouseup', () => { if(isDragging) { Audio_start(); } isDragging = false; });
 
   // 음악 파일 불러오기
 fileInput.addEventListener("change", handleFiles);
