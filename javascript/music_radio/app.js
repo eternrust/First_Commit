@@ -4,6 +4,7 @@ const pause_btn = document.getElementById("Audio_pause");
 const time_text = document.getElementById("Audio_time");
 const audio_bar = document.getElementById("Audio_bar");
 const bar_btn = document.getElementById("Audio_bar_button");
+const Audio_sound = document.getElementById("Audio_sound");
 
 // 음악을 멈추지 않았다 == false │ 음악이 멈췄다 == true
 let pause = false;
@@ -11,14 +12,11 @@ let pause = false;
 //오디오 객체 불러오기
 let MyAudio = new Audio();
 
-// 클릭 중인가?
-let clicked = false;
-
-// 마우스를 움직이는 중인가?
-let moving = false;
-
 // 마우스 이동을 시작했는가? (Drog&Drop)
 let isDragging = false;
+
+// 볼륨은 몇인가?
+let Volume = 50;
 
 // 음악 파일 불러오기
 const handleFiles = (e) => {
@@ -32,6 +30,8 @@ const handleFiles = (e) => {
     MyAudio.src = fileReader.result;
     MyAudio.addEventListener('loadedmetadata', () => Audio_start());
     bar_btn.style.backgroundColor = '#222';
+    pause_btn.style.filter= 'opacity(1) drop-shadow(0 0 0 #000)';
+    Audio_sound.style.filter= 'opacity(1) drop-shadow(0 0 0 #000)';
     bar_btn.style.display = 'block';
   };
 };
@@ -100,7 +100,7 @@ const bar_set = () => {
   // const relativeLeft =  AbsoluteLeft - parentAbsoluteLeft;
   // const elementPercent = relativeLeft / 175 * 100;
   const percentTime = MyAudio.currentTime / MyAudio.duration * 100;
-  bar_btn.style.marginLeft = `${percentTime / 100 * 175}px`;
+  bar_btn.style.marginLeft = `${percentTime / 100 * 130}px`;
 }
 
 // audio_bar 클릭 위치를 재생 위치로 변환
@@ -115,7 +115,7 @@ const bar_click = (e) => {
   let x = e.clientX;
   // bar_btn의 현재 상대 좌표
   const relativeLeft = x - parentAbsoluteLeft;
-  MyAudio.currentTime = (relativeLeft - 12.5) / 175 * MyAudio.duration
+  MyAudio.currentTime = (relativeLeft - 10) / 130 * MyAudio.duration
 
   set_time();
   bar_set();

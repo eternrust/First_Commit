@@ -2,7 +2,7 @@
     width: 400px;
     height: 50px;
     background-color: #eee;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -11,23 +11,52 @@
 
 #Audio_pause {
     cursor: pointer;
+    filter: opacity(0.3) drop-shadow(0 0 0 #ccc);
 }
 
 #Audio_bar {
-    width: 200px;
-    height: 30px;
-    background-color: #ddd;
-    border: 2px soild #ccc;
+    width: 150px;
+    height: 10px;
+    background-color: #ccc;
+    border: 2px soild #bbb;
     border-radius: 20px;
     display: flex;
     align-items: center;
 }
 
 #Audio_bar_button {
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     background-color: #888;
     border: none;
     border-radius: 20px;
     display: none;
+}
+
+#Audio_sound {
+    width: 30px;
+    height: 30px;
+    filter: opacity(0.3) drop-shadow(0 0 0 #ccc);
+}
+
+#Audio_auth {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 5px;
+}
+
+#Audio_auth div {
+    width: 4px;
+    height: 4px;
+    border-radius: 5px;
+    background-color: #222;
+}
+
+#Audio_auth:hover {
+    background-color: #ddd;
 }
