@@ -1,3 +1,8 @@
+* {
+    font-family: NanumGothic;
+    font-style: normal;
+}
+
 #Audio_box {
     width: 400px;
     height: 50px;
@@ -7,6 +12,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    padding: 0 10px 0 10px;
 }
 
 #Audio_pause {
@@ -37,6 +43,49 @@
     width: 30px;
     height: 30px;
     filter: opacity(0.3) drop-shadow(0 0 0 #ccc);
+    z-index: 5;
+}
+
+#Sound_box {
+    width: 130px;
+    height: 30px;
+    padding-right: 35px;
+    background: #ddd;
+    box-shadow: 0 0 5px 2px #ccc;
+    border-radius: 10px;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    display: none;
+}
+
+#Sound_volume {
+    width: 30px;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    display: none;
+}
+
+#Sound_bar {
+    width: 70px;
+    height: 7px;
+    background-color: #bbb;
+    border: 2px soild #bbb;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    display: none;
+}
+
+#Sound_bar_button {
+    width: 15px;
+    height: 15px;
+    background-color: #222;
+    border: none;
+    border-radius: 20px;
+    display: none;
 }
 
 #Audio_auth {

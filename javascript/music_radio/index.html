@@ -13,8 +13,8 @@
     
     <!--사운드 바를 구현하기 위한 참고-->
     <audio autoplay loop controls id="myAudio">
-        <source src="sound.mp3" type="audio/mpeg">
-        <source src="sound.ogg" type="audio/ogg">
+        <source src?="sound.mp3" type="audio/mpeg">
+        <source src?="sound.ogg" type="audio/ogg">
         오디오가 지원되지 않는 브라우저입니다.
     </audio>
 
@@ -25,7 +25,15 @@
         <div id="Audio_bar">
             <div id="Audio_bar_button"></div>
         </div>
-        <img id="Audio_sound" src="./sound_on.png"/>
+        <div>
+            <div id="Sound_box">
+                <span id="Sound_volume"></span>
+                <div id="Sound_bar">
+                    <div id="Sound_bar_button"></div>
+                </div>
+            </div>
+            <img id="Audio_sound" src="./sound_on.png"/>
+        </div>
         <div id="Audio_auth">
             <div></div>
             <div></div>
