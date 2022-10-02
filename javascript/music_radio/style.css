@@ -54,7 +54,6 @@
     box-shadow: 0 0 5px 2px #ccc;
     border-radius: 10px;
     position: fixed;
-    display: flex;
     align-items: center;
     justify-content: space-around;
     display: none;
@@ -63,7 +62,6 @@
 #Sound_volume {
     width: 30px;
     font-size: 15px;
-    display: flex;
     justify-content: center;
     display: none;
 }
@@ -74,7 +72,6 @@
     background-color: #bbb;
     border: 2px soild #bbb;
     border-radius: 20px;
-    display: flex;
     align-items: center;
     display: none;
 }
