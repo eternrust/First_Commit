@@ -20,7 +20,7 @@ let pause = false;
 let isDragging = false;
 
 // 마우스 이동을 시작했는가? (Drog&Drop) (sound.ver)
-let sound_isDragging = false;
+let Sound_isDragging = false;
 
 // 볼륨은 몇인가?
 let volume = 100;
@@ -47,13 +47,13 @@ const handleFiles = (e) => {
 // 음악 시작(정지) 버튼 눌렀을 때
 const pause_click = () => {
   if (pause) {
-    if (MyAudio.src !== undefined) {
+    if (MyAudio.src !== '') {
       Audio_start();
     }
     Pause_btn.innerText = "❚❚";
     pause = false;
   } else {
-    if (MyAudio.src !== undefined) {
+    if (MyAudio.src !== '') {
       MyAudio.pause();
     }
     Pause_btn.innerText = "▶︎";
@@ -119,9 +119,7 @@ const bar_set_time = () => {
 // Audio_bar 클릭 위치를 재생 위치로 변환
 const bar_click = (e) => {
   if (isDragging && !pause) {
-    if (MyAudio.src !== undefined) {
-      MyAudio.pause();
-    }
+    MyAudio.pause();
     Pause_btn.innerText = "▶︎";
     pause = true;
   }
@@ -147,6 +145,21 @@ const bar_set_sound = () => {
   MyAudio.volume = volume / 100;
   Sound_volume.innerText = volume;
   Sound_bar_btn.style.marginLeft = `${volume / 100 * 55}px`;
+  set_volume();
+}
+
+const sound_bar_click = (e) => {
+  const parentAbsoluteLeft = getAbsoluteLeft(Sound_bar);
+  let x = e.clientX;
+  // bar_btn의 현재 상대 좌표
+  const relativeLeft = x - parentAbsoluteLeft;
+  volume = Math.round(relativeLeft / 62.5 * 100);
+  if(volume > 100) {
+    volume = 100;
+  } else if(volume < 0) {
+    volume = 0;
+  }
+  bar_set_sound();
 }
 
 // sound_box 나타내기
@@ -176,29 +189,33 @@ const fixed_sound = () => {
 // 초기 볼륨 설정
 bar_set_sound();
 
-// Audio_sound를 클릭했읋 때(수정해야 함)
+// Audio_sound를 클릭했읋 때
 Audio_sound.addEventListener('click', () => {
-  if (MyAudio.src !== undefined)
+  if (MyAudio.src !== '') {
     sound_click();
+  }
 });
 
-// 수정해야 함
 // Audio_sound가 이미 클릭되어 있는 상태에서 다른 것을 클릭했을 때
-Audio_sound.addEventListener('click', (e) => {
+document.addEventListener('click', (e) => {
   let id = e.target.id;
-  if (MyAudio.src !== undefined && id !== 'Audio_sound' && id !== 'Sound_box' && id !== 'Sound_volume' && id !== 'Sound_bar' && id !== 'Sound_bar_btn')
+  if (Sound_box.style.display == 'flex' && id !== 'Audio_sound' && id !== 'Sound_box' && id !== 'Sound_volume' && id !== 'Sound_bar' && id !== 'Sound_bar_button')
     sound_click();
 });
 
 // 스페이스 눌렀을때 음악 정지 및 시작
 document.addEventListener("keydown", (e) => {
-  if (MyAudio.src !== undefined && e.key == ' ')
+  if (MyAudio.src !== '' && e.key == ' ')
     pause_click();
 })
 
 // 초기 기본 시작(정지) 버튼 설정
 Pause_btn.innerText = "▶︎";
-Pause_btn.addEventListener("click", () => pause_click());
+Pause_btn.addEventListener("click", () => {
+  if (MyAudio.src !== '') {
+    pause_click();
+  }
+});
 
 // 초기 기본 초 설정
 Time_text.innerText = '0 : 00 / 0 : 00';
@@ -207,11 +224,36 @@ Time_text.innerText = '0 : 00 / 0 : 00';
 const parentAbsoluteLeft = getAbsoluteLeft(Audio_bar);
 
 // audio_bar를 클릭했을 때
-Audio_bar.addEventListener("click", (event) => bar_click(event));
-// Audio_bar_btn 드래그 앤 드롭
+Audio_bar.addEventListener("click", (event) => {
+  if (MyAudio.src !== '') {
+    bar_click(event);
+  }
+});
+// Audio_bar_btn && Sound_bar_btn 드래그 앤 드롭
 Audio_bar_btn.addEventListener('mousedown', () => { isDragging = true; });
-document.addEventListener('mousemove', (event) => { if (isDragging) { bar_click(event); } });
-document.addEventListener('mouseup', () => { if (isDragging) { Audio_start(); } isDragging = false; });
+Sound_bar_btn.addEventListener('mousedown', () => { Sound_isDragging = true; });
+document.addEventListener('mousemove', (event) => {
+  if (isDragging) { 
+    bar_click(event); 
+  }
+  if (Sound_isDragging) {
+    sound_bar_click(event);
+  }
+});
+document.addEventListener('mouseup', () => {
+  if (isDragging) {
+    Audio_start();
+  }
+  isDragging = false;
+  Sound_isDragging = false;
+});
+
+// Sound_bar를 클릭했을 때
+Sound_bar.addEventListener("click", (event) => {
+  if (MyAudio.src !== '') {
+    sound_bar_click(event);
+  }
+});
 
 // 음악 파일 불러오기
 fileInput.addEventListener("change", handleFiles);
