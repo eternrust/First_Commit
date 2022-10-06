@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,10 +8,11 @@
     <title>music_radio</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!--음악 파일 불러오기-->
     <input type="file" id="fileUpload" accept='audio/*' />
-    
+
     <!--사운드 바를 구현하기 위한 참고-->
     <audio autoplay loop controls id="myAudio">
         <source src?="sound.mp3" type="audio/mpeg">
@@ -32,14 +34,23 @@
                     <div id="Sound_bar_button"></div>
                 </div>
             </div>
-            <img id="Audio_sound" src="./sound_on.png"/>
+            <img id="Audio_sound" src="./sound_on.png" />
         </div>
-        <div id="Audio_auth">
-            <div></div>
-            <div></div>
-            <div></div>
+        <div>
+            <div id="Audio_auth_button">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div id="Audio_auth">
+                <div class="auths">
+                    <img class="auth_img" src="playbackRate.png" width="30px" height="30px"/>
+                    <span class="auth_text">재생속도</span>
+                </div>
+            </div>
         </div>
     </div>
     <script src="./app.js"></script>
 </body>
+
 </html>

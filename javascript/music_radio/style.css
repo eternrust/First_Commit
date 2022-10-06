@@ -85,7 +85,7 @@
     display: none;
 }
 
-#Audio_auth {
+#Audio_auth_button {
     width: 20px;
     height: 20px;
     border-radius: 20px;
@@ -96,13 +96,38 @@
     padding: 5px;
 }
 
-#Audio_auth div {
+#Audio_auth_button div {
     width: 4px;
     height: 4px;
     border-radius: 5px;
     background-color: #222;
 }
 
-#Audio_auth:hover {
+#Audio_auth_button:hover {
     background-color: #ddd;
+}
+
+#Audio_auth {
+    width: 110px;
+    height: auto;
+    padding: 10px;
+    position: fixed;
+    background: #ddd;
+    border-radius: 10px;
+    display: none;
+}
+
+.auths{
+    width: 100px;
+    height: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.auths:hover {
+    background: #ccc;
 }

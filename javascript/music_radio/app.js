@@ -9,6 +9,10 @@ const Sound_box = document.getElementById("Sound_box");
 const Sound_volume = document.getElementById("Sound_volume");
 const Sound_bar = document.getElementById("Sound_bar");
 const Sound_bar_btn = document.getElementById("Sound_bar_button");
+const Auth_btn = document.getElementById("Audio_auth_button");
+const Auth = document.getElementById("Audio_auth");
+// 파일 읽는 객체 블러오기
+const fileReader = new FileReader();
 
 //오디오 객체 불러오기
 let MyAudio = new Audio();
@@ -23,13 +27,14 @@ let isDragging = false;
 let Sound_isDragging = false;
 
 // 볼륨은 몇인가?
-let volume = 100;
+let volume = 30;
 
 // 음악 파일 불러오기
 const handleFiles = (e) => {
   const selectedFile = [...fileInput.files];
-  const fileReader = new FileReader();
-  fileReader.readAsDataURL(selectedFile[0]);
+  if (selectedFile[0] !== undefined) {
+    fileReader.readAsDataURL(selectedFile[0]);
+  }
 
   fileReader.onload = function () {
     // audio.src = fileReader.result;
@@ -46,18 +51,16 @@ const handleFiles = (e) => {
 
 // 음악 시작(정지) 버튼 눌렀을 때
 const pause_click = () => {
-  if (pause) {
+  if (MyAudio.paused) {
     if (MyAudio.src !== '') {
       Audio_start();
     }
     Pause_btn.innerText = "❚❚";
-    pause = false;
   } else {
     if (MyAudio.src !== '') {
       MyAudio.pause();
     }
     Pause_btn.innerText = "▶︎";
-    pause = true;
   }
 }
 
@@ -116,9 +119,9 @@ const bar_set_time = () => {
   Audio_bar_btn.style.marginLeft = `${percentTime / 100 * 130}px`;
 }
 
-// Audio_bar 클릭 위치를 재생 위치로 변환
+// Audio_bar 클릭 위치를 재생 위s치로 변환
 const bar_click = (e) => {
-  if (isDragging && !pause) {
+  if (isDragging && !MyAudio.paused) {
     MyAudio.pause();
     Pause_btn.innerText = "▶︎";
     pause = true;
@@ -154,9 +157,9 @@ const sound_bar_click = (e) => {
   // bar_btn의 현재 상대 좌표
   const relativeLeft = x - parentAbsoluteLeft;
   volume = Math.round(relativeLeft / 62.5 * 100);
-  if(volume > 100) {
+  if (volume > 100) {
     volume = 100;
-  } else if(volume < 0) {
+  } else if (volume < 0) {
     volume = 0;
   }
   bar_set_sound();
@@ -199,8 +202,11 @@ Audio_sound.addEventListener('click', () => {
 // Audio_sound가 이미 클릭되어 있는 상태에서 다른 것을 클릭했을 때
 document.addEventListener('click', (e) => {
   let id = e.target.id;
+  let Class = e.target.className;
   if (Sound_box.style.display == 'flex' && id !== 'Audio_sound' && id !== 'Sound_box' && id !== 'Sound_volume' && id !== 'Sound_bar' && id !== 'Sound_bar_button')
     sound_click();
+  if (id !== 'Audio_auth_button' && id !== 'Audio_auth' && Class !== 'auths' && Class !== 'auth_img' && Class !== 'auth_text')
+    Auth.style.display = 'none';
 });
 
 // 스페이스 눌렀을때 음악 정지 및 시작
@@ -233,15 +239,15 @@ Audio_bar.addEventListener("click", (event) => {
 Audio_bar_btn.addEventListener('mousedown', () => { isDragging = true; });
 Sound_bar_btn.addEventListener('mousedown', () => { Sound_isDragging = true; });
 document.addEventListener('mousemove', (event) => {
-  if (isDragging) { 
-    bar_click(event); 
+  if (isDragging) {
+    bar_click(event);
   }
   if (Sound_isDragging) {
     sound_bar_click(event);
   }
 });
 document.addEventListener('mouseup', () => {
-  if (isDragging) {
+  if (isDragging && pause) {
     Audio_start();
   }
   isDragging = false;
@@ -254,6 +260,10 @@ Sound_bar.addEventListener("click", (event) => {
     sound_bar_click(event);
   }
 });
+
+Auth_btn.addEventListener('click', () => {
+  Auth.style.display = 'flex';
+})
 
 // 음악 파일 불러오기
 fileInput.addEventListener("change", handleFiles);
