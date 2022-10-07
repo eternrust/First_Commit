@@ -11,6 +11,7 @@ const Sound_bar = document.getElementById("Sound_bar");
 const Sound_bar_btn = document.getElementById("Sound_bar_button");
 const Auth_btn = document.getElementById("Audio_auth_button");
 const Auth = document.getElementById("Audio_auth");
+const Auth_div = document.querySelectorAll(".auths");
 // 파일 읽는 객체 블러오기
 const fileReader = new FileReader();
 
@@ -108,6 +109,7 @@ const getAbsoluteLeft = (element) => {
   return window.pageXOffset + element.getBoundingClientRect().left;
 }
 
+
 // 음악 재생 위치 결정하기(미완성)
 const bar_set_time = () => {
   // const parentAbsoluteLeft = getAbsoluteLeft(Audio_bar); 
@@ -168,16 +170,10 @@ const sound_bar_click = (e) => {
 // sound_box 나타내기
 const sound_click = () => {
   fixed_sound();
-  if (Sound_box.style.display == 'none') {
-    Sound_box.style.display = 'flex';
-    Sound_volume.style.display = 'flex';
-    Sound_bar.style.display = 'flex';
-    Sound_bar_btn.style.display = 'block';
+  if (Sound_box.style.transform == 'scale(0)') {
+    Sound_box.style.transform = 'scale(1)';
   } else {
-    Sound_box.style.display = 'none';
-    Sound_volume.style.display = 'none';
-    Sound_bar.style.display = 'none';
-    Sound_bar_btn.style.display = 'none';
+    Sound_box.style.transform = 'scale(0)';
   }
 }
 
@@ -187,6 +183,13 @@ const fixed_sound = () => {
   const parentAbsoluteTop = getAbsoluteTop(Audio_sound);
   Sound_box.style.left = `${parentAbsoluteLeft - 130}px`;
   Sound_box.style.top = `${parentAbsoluteTop}px`;
+}
+
+const fixed_auth = () => {
+  const parentAbsoluteLeft = getAbsoluteLeft(Auth_btn);
+  const parentAbsoluteTop = getAbsoluteTop(Auth_btn);
+  Auth.style.left = `${parentAbsoluteLeft - 100}px`;
+  Auth.style.top = `${parentAbsoluteTop - (Auth_div.length * 40) - 5}px`;
 }
 
 // 초기 볼륨 설정
@@ -203,10 +206,12 @@ Audio_sound.addEventListener('click', () => {
 document.addEventListener('click', (e) => {
   let id = e.target.id;
   let Class = e.target.className;
-  if (Sound_box.style.display == 'flex' && id !== 'Audio_sound' && id !== 'Sound_box' && id !== 'Sound_volume' && id !== 'Sound_bar' && id !== 'Sound_bar_button')
+  if (Sound_box.style.transform == 'scale(1)' && id !== 'Audio_sound' && id !== 'Sound_box' && id !== 'Sound_volume' && id !== 'Sound_bar' && id !== 'Sound_bar_button') {
     sound_click();
-  if (id !== 'Audio_auth_button' && id !== 'Audio_auth' && Class !== 'auths' && Class !== 'auth_img' && Class !== 'auth_text')
-    Auth.style.display = 'none';
+  }
+  if (id !== 'Audio_auth_button' && id !== 'Audio_auth' && Class !== 'auths' && Class !== 'auth_img' && Class !== 'auth_text') {
+    Auth.style.transform = 'scale(0)';
+  }
 });
 
 // 스페이스 눌렀을때 음악 정지 및 시작
@@ -262,7 +267,8 @@ Sound_bar.addEventListener("click", (event) => {
 });
 
 Auth_btn.addEventListener('click', () => {
-  Auth.style.display = 'flex';
+  fixed_auth();
+  Auth.style.transform = 'scale(1)';
 })
 
 // 음악 파일 불러오기

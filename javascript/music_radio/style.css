@@ -56,14 +56,17 @@
     position: fixed;
     align-items: center;
     justify-content: space-around;
-    display: none;
+    display: flex;
+    transform-origin: right;
+    transform: scale(0);
+    transition: 0.3s;
 }
 
 #Sound_volume {
     width: 30px;
     font-size: 15px;
     justify-content: center;
-    display: none;
+    display: flex;
 }
 
 #Sound_bar {
@@ -73,7 +76,7 @@
     border: 2px soild #bbb;
     border-radius: 20px;
     align-items: center;
-    display: none;
+    display: flex;
 }
 
 #Sound_bar_button {
@@ -82,7 +85,7 @@
     background-color: #222;
     border: none;
     border-radius: 20px;
-    display: none;
+    display: block;
 }
 
 #Audio_auth_button {
@@ -114,7 +117,10 @@
     position: fixed;
     background: #ddd;
     border-radius: 10px;
-    display: none;
+    display: flex;
+    transform-origin: right bottom;
+    transform: scale(0);
+    transition: 0.3s;
 }
 
 .auths{
