@@ -2,7 +2,7 @@
 // https://www.acmicpc.net/problem/1271
 
 let fs = require('fs');
-let input = fs.readFileSync('예제.txt').toString().split(' ');
+let input = fs.readFileSync('../../예제.txt').toString().split(' ');
 
 let num = [];
 for(let i = 0; i < input.length; i++) {
