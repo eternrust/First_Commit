@@ -1,0 +1,56 @@
+#text {
+    font-size: 20px;
+    font-weight: 700;
+    font-weight: 160%;
+}
+
+#link {
+    font-size: 20px;
+    font-weight: 700;
+    font-weight: 160%;
+
+    color: #555555;
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+#link:hover {
+    color: rgb(33, 150, 243);
+    text-decoration: underline;
+}
+
+#bubble-wrapper {
+    height: 100%;
+    width: 100%;
+
+    position: fixed;
+    bottom: 0px;
+
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.bubble {
+    height: max(300px, 30vw);
+    width: max(300px, 30vw);
+
+    background-color: rgb(33, 150, 243);
+    border-radius: 100%;
+
+    position: absolute;
+    left: 50%;
+    top: 100%;
+
+    animation: wave 2s ease-in-out infinite;
+}
+
+@keyframes wave {
+    from, to {
+        transform: translate(-50%, 0%);
+    }
+
+    50% {
+        transform: translate(-50%, -20%);
+    }
+}
