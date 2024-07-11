@@ -25,7 +25,7 @@ class Animation {
         y: window.innerHeight / 2,
     };
     mouseStored = Object.assign({}, this.mouse);
-    constructor() {
+    constructor(selector) {
         this.svg =document.querySelector(selector);
 
         this.svgWidth = this.cols * this.lineWidth + 2 *
