@@ -1,7 +1,6 @@
 // 에디터
 // https://www.acmicpc.net/problem/1406
 
-
 let input = require('fs').readFileSync('../../예제.txt').toString().replace(/\r*/g, "").split('\n');
 
 // 시간초과로 실패한 코드

@@ -7,4 +7,4 @@ function solution(x, n) {
         answer.push(x * i);
     }
     return answer;
-}
+}W
